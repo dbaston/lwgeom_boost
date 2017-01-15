@@ -8,86 +8,14 @@ extern "C" {
     #include <liblwgeom.h>
 }
 
+#include "adapter_lwpoint.h"
+#include "adapter_point2d.h"
+
 #include "ptarray_iterator.h"
 
 namespace boost {
     namespace geometry {
         namespace traits {
-            // Adapt POINT2D to Boost.Geometry
-            template<>
-            struct tag<POINT2D> {
-                using type= point_tag;
-            };
-
-            template<>
-            struct coordinate_type<POINT2D> {
-                using type= double;
-            };
-
-            template<>
-            struct coordinate_system<POINT2D> {
-                using type= cs::cartesian;
-            };
-
-            template<>
-            struct dimension<POINT2D> : boost::mpl::int_<2> {
-            };
-
-            template<>
-            struct access<POINT2D, 0> {
-                static double get(POINT2D const &p) {
-                    return p.x;
-                }
-
-                static void set(POINT2D &p, double const &value) {
-                    p.x = value;
-                }
-            };
-
-            template<>
-            struct access<POINT2D, 1> {
-                static double get(POINT2D const &p) {
-                    return p.y;
-                }
-
-                static void set(POINT2D &p, double const &value) {
-                    p.y = value;
-                }
-            };
-
-            // Adapt LWPOINT to Boost.Geometry
-            template<>
-            struct tag<LWPOINT> {
-                typedef point_tag type;
-            };
-
-            template<>
-            struct dimension<LWPOINT> : boost::mpl::int_<2> {};
-
-            template<>
-            struct coordinate_type<LWPOINT> {
-                typedef double type;
-            };
-
-            template<>
-            struct coordinate_system<LWPOINT> {
-                typedef cs::cartesian type;
-            };
-
-            template<>
-            struct access<LWPOINT, 0> {
-                static double get(LWPOINT const &p) {
-                    return lwpoint_get_x(&p);
-                }
-            };
-
-            template<>
-            struct access<LWPOINT, 1> {
-                static double get(LWPOINT const &p) {
-                    return lwpoint_get_y(&p);
-                }
-            };
-
             // Adapt LWLINE to Boost.Geometry
             //template<>
             //struct tag<LWLINE>
