@@ -38,7 +38,7 @@ int main() {
     POINT2D p1 { 3, 5 };
     LWPOINT* p2 = lwpoint_make2d(0, 3.0, 7.0);
 
-    //cout << boost::geometry::distance(p1, *p2) << endl;
+    cout << boost::geometry::distance(p1, *p2) << endl;
 
     POINTARRAY* pta = ptarray_construct_empty(1, 1, 4);
     pta = ptarray_addPoint(pta, (uint8_t*) &p1, 2, 0);

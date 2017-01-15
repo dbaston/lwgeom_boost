@@ -12,7 +12,7 @@ namespace boost {
             // Adapt LWPOINT to Boost.Geometry
             template<>
             struct tag<LWPOINT> {
-                typedef point_tag type;
+                using type= point_tag;
             };
 
             template<>
@@ -20,12 +20,12 @@ namespace boost {
 
             template<>
             struct coordinate_type<LWPOINT> {
-                typedef double type;
+                using type= double;
             };
 
             template<>
             struct coordinate_system<LWPOINT> {
-                typedef cs::cartesian type;
+                using type= cs::cartesian;
             };
 
             template<>
