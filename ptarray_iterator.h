@@ -1,6 +1,7 @@
 #ifndef LWGEOM_BOOST_PTARRAY_ITERATOR_H
 #define LWGEOM_BOOST_PTARRAY_ITERATOR_H
 
+
 extern "C" {
 #include <liblwgeom.h>
 }
@@ -13,7 +14,6 @@ public:
     using difference_type= int;
     using value_type= T;
     using pointer= decltype(std::declval<T>());
-    //using const_type= typename std::add_const<value_type>::type;
     using reference= const value_type&;
 
 private:
@@ -27,6 +27,14 @@ public:
 
     reference operator*() const;
 
+    pointer operator->() const {
+        return &(*(*this));
+    }
+
+    reference operator[](difference_type i) const {
+        return *ptarray_const_iterator(m_pta, i);
+    }
+
     ptarray_const_iterator& operator++() {
         ++m_pos;
         return *this;
@@ -34,6 +42,15 @@ public:
 
     ptarray_const_iterator operator++(int junk) {
         return ptarray_const_iterator(m_pta, m_pos++);
+    }
+
+    ptarray_const_iterator& operator--() {
+        --m_pos;
+        return *this;
+    }
+
+    ptarray_const_iterator operator--(int junk) {
+        return ptarray_const_iterator(m_pta, m_pos--);
     }
 
     ptarray_const_iterator& operator+=(difference_type n) {
@@ -106,6 +123,5 @@ template<typename T>
 ptarray_const_iterator<T> cend(const POINTARRAY & pta) {
     return ptarray_const_iterator<T>(&pta, pta.npoints);
 }
-
 
 #endif //LWGEOM_BOOST_PTARRAY_ITERATOR_H
