@@ -1,7 +1,6 @@
 #ifndef LWGEOM_BOOST_PTARRAY_ITERATOR_H
 #define LWGEOM_BOOST_PTARRAY_ITERATOR_H
 
-
 extern "C" {
 #include <liblwgeom.h>
 }
@@ -98,6 +97,11 @@ public:
         return m_pos <= other.m_pos;
     }
 };
+
+template<typename T>
+ptarray_const_iterator<T> operator+ (typename ptarray_const_iterator<T>::difference_type n, const ptarray_const_iterator<T> & i) {
+    return i + n;
+}
 
 template<>
 const POINT2D & ptarray_const_iterator<POINT2D>::operator*() const {

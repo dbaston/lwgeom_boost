@@ -16,7 +16,8 @@ namespace boost {
             };
 
             template<>
-            struct dimension<LWPOINT> : boost::mpl::int_<2> {};
+            struct dimension<LWPOINT> : boost::mpl::int_<2> {
+            };
 
             template<>
             struct coordinate_type<LWPOINT> {
